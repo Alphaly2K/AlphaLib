@@ -1,12 +1,18 @@
 #pragma once
-class BigNumber{
-        private:
+namespace alp{
+        class BigNumber{
+        public:
         char* number;
         int adv;
-        public:
         BigNumber();
         ~BigNumber();
-        int Alt(char);
         BigNumber(char*,int);
-        char* Add(char*,char*,int);
+        BigNumber* Add(BigNumber);
+        BigNumber* Add(char*,int);
+        BigNumber* Add(int);
+        BigNumber operator+(const BigNumber);
+        public:
+        static char* GetTotal(char*,char*,int);
+        static int GetDec(char);
 }; 
+}

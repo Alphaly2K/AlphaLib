@@ -6,20 +6,20 @@ using std::cin;
 using std::cout;
 using std::isalpha;
 using std::strlen;
-
-int BigNumber::Alt(char ch){
+using alp::BigNumber;
+int BigNumber::GetDec(char ch){
 	if(isalpha(ch)) return ch-'A'+10;
 	else return ch-'0';
 }
 
-char* BigNumber::Add(char* a,char* b,int adv){
+char* BigNumber::GetTotal(char* a,char* b,int adv){
 	const char* output="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	const int lena=strlen(a);
 	const int lenb=strlen(b);
     int m[lena+1],n[lenb+1],tmpAns[lenb+1];
 	int maxLen=(lena<lenb)?lenb:lena;
-	for(int i=0;i<lena;i++) m[i]=Alt(a[lena-i-1]);
-	for(int i=0;i<lenb;i++) n[i]=Alt(b[lenb-i-1]);
+	for(int i=0;i<lena;i++) m[i]=GetDec(a[lena-i-1]);
+	for(int i=0;i<lenb;i++) n[i]=GetDec(b[lenb-i-1]);
 	for(int i=0;i<maxLen;i++){
 		tmpAns[i]+=m[i]+n[i]; 
 		tmpAns[i+1]=tmpAns[i]/adv;
@@ -42,4 +42,19 @@ BigNumber::BigNumber(char* num,int nadv=10){
 	int numlen=strlen(num);
 	number=new char[numlen];
 	adv=nadv;
+}
+
+BigNumber* BigNumber::Add(BigNumber num){
+
+}
+BigNumber* BigNumber::Add(char* num,int nadv){
+
+}
+BigNumber* BigNumber::Add(int num){
+
+}
+BigNumber operator+(const BigNumber num){
+	BigNumber newBN(num.number,num.adv);
+	newBN.number=BigNumber::GetTotal(this->number,newBN.number);
+	return bign;
 }
