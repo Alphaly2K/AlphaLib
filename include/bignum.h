@@ -7,9 +7,9 @@ namespace alp{
         BigNumber();
         ~BigNumber();
         BigNumber(char*,int);
-        BigNumber* Add(BigNumber);
-        BigNumber* Add(char*,int);
-        BigNumber* Add(int);
+        BigNumber Add(BigNumber);
+        BigNumber Add(char*,int);
+        BigNumber Add(int);
         BigNumber operator+(const BigNumber);
         public:
         static char* GetTotal(char*,char*,int);
