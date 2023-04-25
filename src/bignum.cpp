@@ -44,17 +44,22 @@ BigNumber::BigNumber(char* num,int nadv=10){
 	adv=nadv;
 }
 
-BigNumber* BigNumber::Add(BigNumber num){
+BigNumber BigNumber::Add(BigNumber num){
+	return *this+num;
+}
+BigNumber BigNumber::Add(char* num,int nadv){
 
 }
-BigNumber* BigNumber::Add(char* num,int nadv){
+BigNumber BigNumber::Add(int num){
 
 }
-BigNumber* BigNumber::Add(int num){
-
-}
-BigNumber operator+(const BigNumber num){
+BigNumber BigNumber::operator+(const BigNumber num){
 	BigNumber newBN(num.number,num.adv);
-	newBN.number=BigNumber::GetTotal(this->number,newBN.number);
-	return bign;
+	char * numb=this->number;
+	if(this->adv==num.adv)
+		newBN.number=BigNumber::GetTotal(numb,newBN.number,num.adv);
+	else{
+		
+	}
+	return newBN;
 }
