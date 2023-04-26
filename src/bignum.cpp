@@ -6,7 +6,9 @@ using std::cin;
 using std::cout;
 using std::isalpha;
 using std::strlen;
+using std::endl;
 using alp::BigNumber;
+using alp::RadixNotEqualException;
 int BigNumber::GetDec(char ch){
 	if(isalpha(ch)) return ch-'A'+10;
 	else return ch-'0';
@@ -45,21 +47,46 @@ BigNumber::BigNumber(char* num,int nadv=10){
 }
 
 BigNumber BigNumber::Add(BigNumber num){
-	return *this+num;
+	try{
+		return *this+num;
+	}catch(RadixNotEqualException& e){
+		e.Print();
+		return BigNumber(0,10);
+	}
+
 }
 BigNumber BigNumber::Add(char* num,int nadv){
-
+	BigNumber newBN(num,nadv);
+	try{
+		return *this+newBN;
+	}catch(RadixNotEqualException& e){
+		e.Print();
+		return BigNumber(0,10);
+	}
 }
 BigNumber BigNumber::Add(int num){
-
+	//To-do
+	return 0;
 }
 BigNumber BigNumber::operator+(const BigNumber num){
 	BigNumber newBN(num.number,num.adv);
-	char * numb=this->number;
 	if(this->adv==num.adv)
-		newBN.number=BigNumber::GetTotal(numb,newBN.number,num.adv);
+		newBN.number=BigNumber::GetTotal(this->number,newBN.number,num.adv);
 	else{
-		
+		throw RadixNotEqualException(this->adv,num.adv);	//Use try-catch to detect RadixNotEqualException.
 	}
 	return newBN;
+}
+void RadixNotEqualException::Print() const{
+	switch (m_flag)
+	{
+	case 1:
+		cout<<"The radix of the value left is bigger than that of the right one."<<endl;
+		break;
+	case 2:
+		cout<<"The radix of the value right is bigger than that of the left one."<<endl;
+	default:
+		cout<<"Unknown exception detected."<<endl;
+		break;
+	}
 }
