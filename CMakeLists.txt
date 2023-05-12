@@ -4,5 +4,5 @@ set(SOURCES
     src/bignum.cpp
     src/text.cpp
 )
-add_library(AlphaLib STATIC ${SOURCES})
+add_library(AlphaLib SHARED ${SOURCES})
 include_directories(include)
